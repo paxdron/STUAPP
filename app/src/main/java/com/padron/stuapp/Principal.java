@@ -1,5 +1,6 @@
 package com.padron.stuapp;
 
+import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.content.res.ResourcesCompat;
@@ -18,7 +19,7 @@ import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.padron.stuapp.fragment.RecyclerViewFragment;
 import com.squareup.picasso.Picasso;
 
-public class Principal extends AppCompatActivity {
+public class Principal extends AppCompatActivity implements RutasFragment.OnFragmentInteractionListener {
 
     private MaterialViewPager mViewPager;
     private Toolbar toolbar;
@@ -46,8 +47,8 @@ public class Principal extends AppCompatActivity {
             @Override
             public Fragment getItem(int position) {
                 switch (position % NUMTABS) {
-                    //case 0:
-                    //    return RecyclerViewFragment.newInstance();
+                    case 0:
+                        return RutasFragment.newInstance();
                     //case 1:
                     //    return RecyclerViewFragment.newInstance();
                     //case 2:
@@ -116,5 +117,10 @@ public class Principal extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Yes, the title is clickable", Toast.LENGTH_SHORT).show();
                 }
             });
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

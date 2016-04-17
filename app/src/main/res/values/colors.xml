@@ -8,4 +8,11 @@
     <color name="material_login_register_color">#0288D1</color>
     <color name="material_login_login_error_color">#ffbebe</color>
     <color name="material_login_register_error_color">#600002</color>
+
+    <color name="ruta_cuautlancingo">#931314</color>
+    <color name="ruta_capu">#f19800</color>
+    <color name="ruta_amalucan">#E00011</color>
+    <color name="ruta_maravillas">#641082</color>
+    <color name="ruta_san_ramon">#2772B5</color>
+    <color name="ruta_heroes">#01652F</color>
 </resources>
