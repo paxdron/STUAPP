@@ -20,13 +20,13 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onRegister(TextInputLayout registerUser, TextInputLayout registerPass, TextInputLayout registerPassRep) {
                 //Handle register
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                startActivity(new Intent(getApplicationContext(),Principal.class));
             }
 
             @Override
             public void onLogin(TextInputLayout loginUser, TextInputLayout loginPass) {
                 //Handle login
-
+                startActivity(new Intent(getApplicationContext(),Principal.class));
             }
         });
     }

@@ -84,7 +84,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng Puebla = new LatLng(19.041428, -98.206300);
         mMap.addMarker(new MarkerOptions().position(Puebla).title("Puebla"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Puebla, 12));
-        try {
+        /*try {
             mMap.clear();
             KmlLayer layer = new KmlLayer(mMap, R.raw.amalucancu, getApplicationContext());
             layer.addLayerToMap();
@@ -92,7 +92,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 

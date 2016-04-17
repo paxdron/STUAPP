@@ -30,4 +30,9 @@
     <string name="name">Usuario</string>
     <string name="repeatPassw">Confirmar Contraseña</string>
     <string name="next">Siguiente</string>
+
+    <string name="stu1">http://imageshack.com/a/img923/2131/k9t1Ta.jpg</string>
+    <string name="stu2">http://imageshack.com/a/img923/1346/MNDfnb.jpg</string>
+    <string name="stu3">http://imageshack.com/a/img924/7581/SgG7Lz.jpg</string>
+
 </resources>
