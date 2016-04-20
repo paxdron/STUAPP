@@ -29,6 +29,31 @@
     <string name="maravillas">Maravillas</string>
     <string name="san_ramon">San Ramón</string>
 
+    <array name="amalucan">
+        <item>CU - Amalucan</item>
+        <item>Amalucan - CU</item>
+    </array>
+    <array name="capu">
+        <item>CU - Capu</item>
+        <item>Capu - CU</item>
+    </array>
+    <array name="cuautlancingo">
+        <item>CU - Cuatutlancingo</item>
+        <item>Cuatutlancingo - CU</item>
+    </array>
+    <array name="heroes">
+        <item>CU - Los Heroes</item>
+        <item>Los Heroes - CU</item>
+    </array>
+    <array name="maravillas">
+        <item>CU - Maravillas</item>
+        <item>Maravillas - CU</item>
+    </array>
+    <array name="sanramon">
+        <item>CU - San Ramón</item>
+        <item>San Ramón - CU</item>
+    </array>
+
     <string name="login">Iniciar Sesión</string>
     <string name="register">Registrar</string>
     <string name="user">Usuario</string>

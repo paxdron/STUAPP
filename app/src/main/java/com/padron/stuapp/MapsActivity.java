@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -37,26 +38,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String TAG = MapsActivity.class.getSimpleName();
     private GoogleMap mMap;
     private Spinner selectRecorrido;
-
     private Gson gson = new Gson();
     private unidadEnServicio[] current;
+    private TextView titulo;
+    private String nombreRuta;
+    private int mapaIda,mapaRegreso,rutas,currentMap;
+    private ArrayAdapter<CharSequence> adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+        titulo=(TextView)findViewById(R.id.tvNombreRuta);
+        RutaSelect();
+        currentMap=mapaIda;
+        titulo.setText(nombreRuta);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        cargarAdaptador();
+        //cargarAdaptador();
+
         selectRecorrido= (Spinner)findViewById(R.id.spSelectRuta);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.rutas,R.layout.support_simple_spinner_dropdown_item);
+        adapter= ArrayAdapter.createFromResource(this,
+                rutas,R.layout.support_simple_spinner_dropdown_item);
         selectRecorrido.setAdapter(adapter);
         selectRecorrido.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                showToast(Integer.toString((current != null) ? current.length : 0), getApplicationContext());
+                showToast(Integer.toString(position), getApplicationContext());
+                //currentMap=(position==0)?mapaIda:mapaRegreso;
+                updateMapa();
             }
 
             @Override
@@ -84,16 +96,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng Puebla = new LatLng(19.041428, -98.206300);
         mMap.addMarker(new MarkerOptions().position(Puebla).title("Puebla"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(Puebla, 12));
-        /*try {
+        updateMapa();
+
+    }
+
+    public void updateMapa(){
+        try {
             mMap.clear();
-            KmlLayer layer = new KmlLayer(mMap, R.raw.amalucancu, getApplicationContext());
+            KmlLayer layer = new KmlLayer(mMap, currentMap, getApplicationContext());
             layer.addLayerToMap();
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
-
+        }
     }
 
     public void showToast(String message, Context context){
@@ -172,8 +188,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
             mMap.addMarker(new MarkerOptions().position(newPoint).title(Integer.toString(i)));
         }
-
         //mMap.
+    }
+
+    public void RutaSelect(){
+        nombreRuta= getIntent().getStringExtra(Principal.RUTA_SELECT);
+        switch(nombreRuta){
+            case "Amalucan":
+                mapaIda=R.raw.cu_amalucan;
+                mapaRegreso=R.raw.amalucan_cu;
+                rutas=R.array.amalucan;
+                break;
+            case "CAPU":
+                mapaIda=R.raw.cu_capu;
+                mapaRegreso=R.raw.capu_cu;
+                rutas=R.array.capu;
+                break;
+            case "Cuautlancingo":
+                mapaIda=R.raw.cu_cuautlancingo;
+                mapaRegreso=R.raw.cuautlancingo_cu;
+                rutas=R.array.cuautlancingo;
+                break;
+            case "Los Héroes":
+                mapaIda=R.raw.cu_heroes;
+                mapaRegreso=R.raw.heroes_cu;
+                rutas=R.array.heroes;
+                break;
+            case "Maravillas":
+                mapaIda=R.raw.cu_maravillas;
+                mapaRegreso=R.raw.maravillas_cu;
+                rutas=R.array.maravillas;
+                break;
+            case "San Ramón":
+                mapaIda=R.raw.cu_sanramon;
+                mapaRegreso=R.raw.sanramon_cu;
+                rutas=R.array.sanramon;
+                break;
+        }
     }
 
 }

@@ -7,8 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import com.bumptech.glide.Glide;
-
 import java.util.List;
 
 /**
@@ -20,28 +18,9 @@ public class AdaptadorRutas
 
     private final List<Ruta> items;
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        // Campos respectivos de un item
-        public TextView nombre;
-        public TextView precio;
-        public ImageView imagen;
-
-        public ViewHolder(View v) {
-            super(v);
-
-            nombre = (TextView) v.findViewById(R.id.nombre_ruta);
-            imagen = (ImageView) v.findViewById(R.id.miniatura_comida);
-        }
-    }
-
-
-    public AdaptadorRutas(List<Ruta> items) {
+    public AdaptadorRutas(List<Ruta> items, OnItemClickListener escuchaClicksExterna) {
         this.items = items;
-    }
-
-    @Override
-    public int getItemCount() {
-        return items.size();
+        this.escuchaClicksExterna = escuchaClicksExterna;
     }
 
     @Override
@@ -63,5 +42,43 @@ public class AdaptadorRutas
 
     }
 
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        // Campos respectivos de un item
+        public TextView nombre;
+        public ImageView imagen;
 
+        public ViewHolder(View v) {
+            super(v);
+            v.setClickable(true);
+            nombre = (TextView) v.findViewById(R.id.nombre_ruta);
+
+            v.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            escuchaClicksExterna.onClick(this, obtenerNombreRuta(getAdapterPosition()-2));
+        }
+    }
+
+    @Override
+    public int getItemCount() {
+        return items.size();
+    }
+
+
+    private OnItemClickListener escuchaClicksExterna;
+
+
+    private String obtenerNombreRuta(int posicion) {
+        if (posicion != RecyclerView.NO_POSITION) {
+            return items.get(posicion).getNombre();
+        } else {
+            return null;
+        }
+    }
+
+    public interface OnItemClickListener {
+        public void onClick(ViewHolder viewHolder, String nombreRuta);
+    }
 }

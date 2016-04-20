@@ -1,5 +1,6 @@
 package com.padron.stuapp;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -19,13 +20,14 @@ import com.github.florent37.materialviewpager.header.HeaderDesign;
 import com.padron.stuapp.fragment.RecyclerViewFragment;
 import com.squareup.picasso.Picasso;
 
-public class Principal extends AppCompatActivity implements RutasFragment.OnFragmentInteractionListener {
+public class Principal extends AppCompatActivity implements RutasFragment.EscuchaFragmento {
 
     private MaterialViewPager mViewPager;
     private Toolbar toolbar;
     private DrawerLayout mDrawer;
     private ActionBarDrawerToggle mDrawerToggle;
     public static final int NUMTABS=3;
+    public static final String RUTA_SELECT="ruta";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,9 +120,11 @@ public class Principal extends AppCompatActivity implements RutasFragment.OnFrag
                 }
             });
     }
-
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public void alSeleccionarItem(String nombreRuta) {
+        Intent intent = new Intent(this,MapsActivity.class);
+        intent.putExtra(RUTA_SELECT,nombreRuta);
+        startActivity(intent);
     }
+
 }
