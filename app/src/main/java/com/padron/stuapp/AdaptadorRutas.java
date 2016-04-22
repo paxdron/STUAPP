@@ -7,6 +7,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 /**
@@ -34,10 +36,11 @@ public class AdaptadorRutas
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
         Ruta item = items.get(i);
 
-        /*Glide.with(viewHolder.itemView.getContext())
+        /*Glide.with()
                 .load(item.getIdDrawable())
                 .centerCrop()
                 .into(viewHolder.imagen);*/
+        Picasso.with(viewHolder.itemView.getContext()).load(item.getImagen()).into(viewHolder.imagen);
         viewHolder.nombre.setText(item.getNombre());
 
     }
@@ -51,7 +54,7 @@ public class AdaptadorRutas
             super(v);
             v.setClickable(true);
             nombre = (TextView) v.findViewById(R.id.nombre_ruta);
-
+            imagen=(ImageView)v.findViewById(R.id.miniatura_ruta);
             v.setOnClickListener(this);
         }
 

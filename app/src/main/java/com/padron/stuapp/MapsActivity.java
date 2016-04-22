@@ -1,6 +1,7 @@
 package com.padron.stuapp;
 
 import android.content.Context;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,7 +22,9 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 import com.google.maps.android.kml.KmlLayer;
@@ -32,18 +36,29 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private static final String TAG = MapsActivity.class.getSimpleName();
     private GoogleMap mMap;
-    private Spinner selectRecorrido;
     private Gson gson = new Gson();
     private unidadEnServicio[] current;
     private TextView titulo;
     private String nombreRuta;
     private int mapaIda,mapaRegreso,rutas,currentMap;
     private ArrayAdapter<CharSequence> adapter;
+    private Button selectRecorrido;
+    private int rutaSelect, indiceRuta;
+    private Handler mHandler;
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            Log.e("Handlers", "Calls");
+            cargarAdaptador();
+            mHandler.postDelayed(mRunnable, 5000);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,31 +66,36 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
         titulo=(TextView)findViewById(R.id.tvNombreRuta);
         RutaSelect();
-        currentMap=mapaIda;
         titulo.setText(nombreRuta);
+        currentMap=mapaRegreso;
+        indiceRuta=rutaSelect*2;
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        //cargarAdaptador();
-
-        selectRecorrido= (Spinner)findViewById(R.id.spSelectRuta);
+        selectRecorrido= (Button)findViewById(R.id.btnSelectRuta);
         adapter= ArrayAdapter.createFromResource(this,
                 rutas,R.layout.support_simple_spinner_dropdown_item);
-        selectRecorrido.setAdapter(adapter);
-        selectRecorrido.setOnItemSelectedListener(new OnItemSelectedListener() {
+        selectRecorrido.setText(adapter.getItem(0));
+        selectRecorrido.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                showToast(Integer.toString(position), getApplicationContext());
-                //currentMap=(position==0)?mapaIda:mapaRegreso;
+            public void onClick(View v) {
+                if (currentMap == mapaIda) {
+                    indiceRuta=rutaSelect*2;
+                    currentMap = mapaRegreso;
+                    selectRecorrido.setText(adapter.getItem(0));
+                } else {
+                    currentMap = mapaIda;
+                    indiceRuta=rutaSelect*2+1;
+                    selectRecorrido.setText(adapter.getItem(1));
+                }
                 updateMapa();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+                cargarAdaptador();
             }
         });
+        //cargarAdaptador();
+        mHandler=new Handler();
+        mHandler.post(mRunnable);
     }
 
 
@@ -182,11 +202,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     public void addMarkers(){
-
+        updateMapa();
         for (int i=0;i<current.length;i++) {
-            LatLng newPoint = new LatLng(current[i].latitud, current[i].longitud);
-
-            mMap.addMarker(new MarkerOptions().position(newPoint).title(Integer.toString(i)));
+            if(current[i].idRuta==indiceRuta) {
+                LatLng newPoint = new LatLng(current[i].latitud, current[i].longitud);
+                mMap.addMarker(new MarkerOptions().position(newPoint).title(Integer.toString(i)).icon(BitmapDescriptorFactory.fromResource(R.drawable.bus)));
+            }
         }
         //mMap.
     }
@@ -198,33 +219,51 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 mapaIda=R.raw.cu_amalucan;
                 mapaRegreso=R.raw.amalucan_cu;
                 rutas=R.array.amalucan;
+                rutaSelect=0;
                 break;
             case "CAPU":
                 mapaIda=R.raw.cu_capu;
                 mapaRegreso=R.raw.capu_cu;
                 rutas=R.array.capu;
+                rutaSelect=1;
                 break;
             case "Cuautlancingo":
                 mapaIda=R.raw.cu_cuautlancingo;
                 mapaRegreso=R.raw.cuautlancingo_cu;
                 rutas=R.array.cuautlancingo;
+                rutaSelect=2;
                 break;
             case "Los Héroes":
                 mapaIda=R.raw.cu_heroes;
                 mapaRegreso=R.raw.heroes_cu;
                 rutas=R.array.heroes;
+                rutaSelect=3;
                 break;
             case "Maravillas":
                 mapaIda=R.raw.cu_maravillas;
                 mapaRegreso=R.raw.maravillas_cu;
                 rutas=R.array.maravillas;
+                rutaSelect=4;
                 break;
             case "San Ramón":
                 mapaIda=R.raw.cu_sanramon;
                 mapaRegreso=R.raw.sanramon_cu;
                 rutas=R.array.sanramon;
+                rutaSelect=5;
                 break;
         }
+    }
+
+    @Override
+    public void onPause() {
+        mHandler.removeCallbacks(mRunnable);
+        super.onPause();
+    }
+
+    @Override
+    public void onResume() {
+        mHandler.post(mRunnable);
+        super.onResume();
     }
 
 }

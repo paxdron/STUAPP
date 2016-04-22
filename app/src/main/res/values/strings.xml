@@ -5,8 +5,8 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
-    <string name="getCurrentVehicles">http://stuapp.esy.es/db/getRecorridoActual.php</string>
-
+    <string name="getCurrentVehicles">http://stuapp.hol.es/db/getRecorridoActual.php</string>
+    <string name="getAvisos">http://stuapp.hol.es/db/obtener_avisos.php</string>
     <array name="rutas">
         <item>Amalucan - CU</item>
         <item>CU - Amalucan</item>
@@ -30,28 +30,28 @@
     <string name="san_ramon">San Ramón</string>
 
     <array name="amalucan">
-        <item>CU - Amalucan</item>
         <item>Amalucan - CU</item>
+        <item>CU - Amalucan</item>
     </array>
     <array name="capu">
-        <item>CU - Capu</item>
         <item>Capu - CU</item>
+        <item>CU - Capu</item>
     </array>
     <array name="cuautlancingo">
-        <item>CU - Cuatutlancingo</item>
         <item>Cuatutlancingo - CU</item>
+        <item>CU - Cuatutlancingo</item>
     </array>
     <array name="heroes">
-        <item>CU - Los Heroes</item>
         <item>Los Heroes - CU</item>
+        <item>CU - Los Heroes</item>
     </array>
     <array name="maravillas">
-        <item>CU - Maravillas</item>
         <item>Maravillas - CU</item>
+        <item>CU - Maravillas</item>
     </array>
     <array name="sanramon">
-        <item>CU - San Ramón</item>
         <item>San Ramón - CU</item>
+        <item>CU - San Ramón</item>
     </array>
 
     <string name="login">Iniciar Sesión</string>
@@ -66,6 +66,17 @@
     <string name="stu1">http://imageshack.com/a/img923/2131/k9t1Ta.jpg</string>
     <string name="stu2">http://imageshack.com/a/img923/1346/MNDfnb.jpg</string>
     <string name="stu3">http://imageshack.com/a/img924/7581/SgG7Lz.jpg</string>
+
+
+    <string name="imgHeroes">http://i1104.photobucket.com/albums/h330/Fernando_Rodriguez_Mendieta/heroes_zps3pyxmmxg.jpg</string>
+    <string name="imgCapu">http://i1104.photobucket.com/albums/h330/Fernando_Rodriguez_Mendieta/capu_zpsomjccyq0.jpg</string>
+    <string name="imgMaravillas">http://i1104.photobucket.com/albums/h330/Fernando_Rodriguez_Mendieta/maravillas_zpsdxwbguxh.jpg</string>
+    <string name="imgSanramon">http://i1104.photobucket.com/albums/h330/Fernando_Rodriguez_Mendieta/sanramon_zpsfy0qzx7v.jpg</string>
+    <string name="imgCuautlancingo">http://i1104.photobucket.com/albums/h330/Fernando_Rodriguez_Mendieta/cuautlancingo_zpsxcwubqng.jpg</string>
+    <string name="imgAmalucan">http://i1104.photobucket.com/albums/h330/Fernando_Rodriguez_Mendieta/CUAUTLANCINGO_zpsa4vesqi9.jpg</string>
+
+
+
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

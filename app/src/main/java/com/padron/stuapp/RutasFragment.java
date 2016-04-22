@@ -63,7 +63,6 @@ public class RutasFragment extends Fragment implements AdaptadorRutas.OnItemClic
 
     @Override
     public void onClick(AdaptadorRutas.ViewHolder viewHolder, String nombreRuta) {
-        Toast.makeText(view.getContext(), "WEA: "+nombreRuta, Toast.LENGTH_SHORT).show();
         escucha.alSeleccionarItem(nombreRuta);
     }
 

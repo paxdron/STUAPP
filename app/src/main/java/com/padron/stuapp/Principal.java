@@ -51,8 +51,8 @@ public class Principal extends AppCompatActivity implements RutasFragment.Escuch
                 switch (position % NUMTABS) {
                     case 0:
                         return RutasFragment.newInstance();
-                    //case 1:
-                    //    return RecyclerViewFragment.newInstance();
+                    case 1:
+                        return AvisosFragment.newInstance();
                     //case 2:
                     //    return WebViewFragment.newInstance();
                     default:
