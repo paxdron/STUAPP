@@ -7,6 +7,7 @@
 
     <string name="getCurrentVehicles">http://stuapp.hol.es/db/getRecorridoActual.php</string>
     <string name="getAvisos">http://stuapp.hol.es/db/obtener_avisos.php</string>
+    <string name="newComment">http://stuapp.hol.es/db/newComment.php</string>
     <array name="rutas">
         <item>Amalucan - CU</item>
         <item>CU - Amalucan</item>
@@ -76,9 +77,12 @@
     <string name="imgAmalucan">http://i1104.photobucket.com/albums/h330/Fernando_Rodriguez_Mendieta/CUAUTLANCINGO_zpsa4vesqi9.jpg</string>
 
 
-
-
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="idUser">idUser</string>
+    <string name="idRuta">idRuta</string>
+    <string name="Fecha">Fecha</string>
+    <string name="Contenido">Contenido</string>
 
 </resources>

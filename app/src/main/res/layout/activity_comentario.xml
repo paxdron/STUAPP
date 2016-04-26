@@ -1,78 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="com.padron.stuapp.Comentario">
     <include
         android:id="@+id/myToolbar"
         layout="@layout/toolbar"
         />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:gravity="center"
-        >
-        <TextView
-            android:layout_marginTop="@dimen/margin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="RUTA"
-            android:textSize="@dimen/titulo"
-            android:id="@+id/tvNombreRuta"
-            />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            >
-            <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/btnSelectRuta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                fancy:fb_borderColor="#FFFFFF"
-                fancy:fb_borderWidth="1dp"
-                fancy:fb_defaultColor="@color/colorAccent"
-                fancy:fb_focusColor="@color/colorPrimaryDark"
-                fancy:fb_radius="30dp"
-                fancy:fb_textColor="#FFFFFF" />
-
-            <mehdi.sakout.fancybuttons.FancyButton
-                android:id="@+id/btn_addCom"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                fancy:fb_borderColor="#FFFFFF"
-                fancy:fb_borderWidth="1dp"
-                fancy:fb_defaultColor="@color/colorAccent"
-                fancy:fb_focusColor="@color/colorPrimaryDark"
-                fancy:fb_radius="30dp"
-                fancy:fb_text="Agregar Comentario"
-                fancy:fb_textColor="#FFFFFF" />
-        </LinearLayout>
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:map="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context="com.padron.stuapp.MapsActivity"
-            />
-    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        android:layout_gravity="bottom|end"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/footer"
         >
     </LinearLayout>
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/myToolbar"
+        android:layout_above="@id/footer"
+        android:orientation="vertical"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Nuevo comentario"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="30sp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:id="@+id/tvRuta"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Escribe tu comentario"
+            android:layout_margin="10dp"
+            android:lines="5"
+            android:maxLength="200"
+            android:id="@+id/comentario"
+            android:textColor="@color/colorAccent"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="30dp"
+            android:gravity="center"
+            >
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/btnCancell"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                fancy:fb_borderColor="#FFFFFF"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_defaultColor="@color/cancel"
+                fancy:fb_focusColor="@color/colorPrimaryDark"
+                fancy:fb_radius="30dp"
+                fancy:fb_text="Cancelar"
+                fancy:fb_textColor="#FFFFFF" />
+
+            <mehdi.sakout.fancybuttons.FancyButton
+                android:id="@+id/btnOk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                fancy:fb_borderColor="#FFFFFF"
+                fancy:fb_borderWidth="1dp"
+                fancy:fb_defaultColor="@color/ok"
+                fancy:fb_focusColor="@color/colorPrimaryDark"
+                fancy:fb_radius="30dp"
+                fancy:fb_text="Enviar Comentario"
+                fancy:fb_textColor="#FFFFFF" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -15,4 +15,7 @@
     <color name="ruta_maravillas">#641082</color>
     <color name="ruta_san_ramon">#2772B5</color>
     <color name="ruta_heroes">#01652F</color>
+
+    <color name="cancel">#BB0000</color>
+    <color name="ok">#008800</color>
 </resources>

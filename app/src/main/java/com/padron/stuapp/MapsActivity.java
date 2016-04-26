@@ -1,6 +1,7 @@
 package com.padron.stuapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
@@ -38,9 +39,12 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import mehdi.sakout.fancybuttons.FancyButton;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private static final String TAG = MapsActivity.class.getSimpleName();
+    public static final String ID_RUTA = "ID_RUTA";
     private GoogleMap mMap;
     private Gson gson = new Gson();
     private unidadEnServicio[] current;
@@ -48,7 +52,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String nombreRuta;
     private int mapaIda,mapaRegreso,rutas,currentMap;
     private ArrayAdapter<CharSequence> adapter;
-    private Button selectRecorrido;
+    private FancyButton selectRecorrido,addComment;
     private int rutaSelect, indiceRuta;
     private Handler mHandler;
     private Runnable mRunnable = new Runnable() {
@@ -73,24 +77,33 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
-        selectRecorrido= (Button)findViewById(R.id.btnSelectRuta);
+        selectRecorrido= (FancyButton)findViewById(R.id.btnSelectRuta);
+        addComment= (FancyButton)findViewById(R.id.btn_addCom);
         adapter= ArrayAdapter.createFromResource(this,
                 rutas,R.layout.support_simple_spinner_dropdown_item);
-        selectRecorrido.setText(adapter.getItem(0));
+        selectRecorrido.setText(adapter.getItem(0).toString());
         selectRecorrido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (currentMap == mapaIda) {
                     indiceRuta=rutaSelect*2;
                     currentMap = mapaRegreso;
-                    selectRecorrido.setText(adapter.getItem(0));
+                    selectRecorrido.setText(adapter.getItem(0).toString());
                 } else {
                     currentMap = mapaIda;
                     indiceRuta=rutaSelect*2+1;
-                    selectRecorrido.setText(adapter.getItem(1));
+                    selectRecorrido.setText(adapter.getItem(1).toString());
                 }
                 updateMapa();
                 cargarAdaptador();
+            }
+        });
+        addComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i= new Intent(v.getContext(),Comentario.class);
+                i.putExtra(ID_RUTA,indiceRuta);
+                startActivity(i);
             }
         });
         //cargarAdaptador();
